@@ -1,0 +1,85 @@
+#include <stdio.h>
+
+struct Book
+{
+    int id;
+    char name[50];
+    int available;
+};
+
+int main()
+{
+    struct Book b[5] = {
+        {101, "C Programming", 1},
+        {102, "Data Structure", 1},
+        {103, "Python", 1},
+        {104, "Java", 1},
+        {105, "DBMS", 1}
+    };
+
+    int choice, id, i;
+
+    do
+    {
+        printf("\n--- Library Management System ---\n");
+        printf("1. Display Books\n");
+        printf("2. Issue Book\n");
+        printf("3. Return Book\n");
+        printf("4. Exit\n");
+        printf("Enter choice: ");
+        scanf("%d", &choice);
+
+        switch(choice)
+        {
+            case 1:
+                printf("\nID\tBook\t\tStatus\n");
+                for(i=0;i<5;i++)
+                {
+                    printf("%d\t%s\t\t%s\n", b[i].id, b[i].name,
+                    b[i].available?"Available":"Issued");
+                }
+                break;
+
+            case 2:
+                printf("Enter Book ID: ");
+                scanf("%d",&id);
+                for(i=0;i<5;i++)
+                {
+                    if(b[i].id==id)
+                    {
+                        if(b[i].available)
+                        {
+                            b[i].available=0;
+                            printf("Book Issued Successfully.\n");
+                        }
+                        else
+                            printf("Book Already Issued.\n");
+                    }
+                }
+                break;
+
+            case 3:
+                printf("Enter Book ID: ");
+                scanf("%d",&id);
+                for(i=0;i<5;i++)
+                {
+                    if(b[i].id==id)
+                    {
+                        b[i].available=1;
+                        printf("Book Returned Successfully.\n");
+                    }
+                }
+                break;
+
+            case 4:
+                printf("Thank You!\n");
+                break;
+
+            default:
+                printf("Invalid Choice\n");
+        }
+
+    }while(choice!=4);
+
+    return 0;
+}
